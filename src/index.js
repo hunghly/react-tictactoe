@@ -130,7 +130,7 @@ class Game extends React.Component {
             );
         })
         console.log(moves);
-
+//
 
         let status;
         if (winner) {
