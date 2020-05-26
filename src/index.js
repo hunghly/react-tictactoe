@@ -5,18 +5,58 @@ import './index.css';
 // import * as serviceWorker from './serviceWorker';
 
 class Square extends React.Component {
+
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         value: null,
+    //     };
+    // }
+
     render() {
         return (
-            <button className="square">
-                {/* TODO */}
+            <button className="square" onClick={() => {
+                console.log("clicked");
+                // this.setState({value: 'X'});
+                this.props.onClick();
+            }}>
+                {this.props.value}
             </button>
         );
     }
 }
 
+class Something extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {}
+    }
+
+    render() {
+        return "";
+    }
+}
+
 class Board extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            squares: Array(9).fill(null)
+        }
+    }
+
     renderSquare(i) {
-        return <Square />;
+        return (
+            <Square value={this.state.squares[i]} onClick={() => this.handleClick(i)}/>
+        );
+    }
+
+    handleClick(i) {
+        const squares = this.state.squares;
+        squares[i] = 'X';
+        this.setState({squares: squares})
     }
 
     render() {
@@ -50,11 +90,16 @@ class Game extends React.Component {
         return (
             <div className="game">
                 <div className="game-board">
-                    <Board />
+                    <Board/>
                 </div>
                 <div className="game-info">
-                    <div>{/* status */}</div>
-                    <ol>{/* TODO */}</ol>
+                    <div>{
+                        /* status */
+                    }
+                    </div>
+                    <ol>{
+                        /* TODO */
+                    }</ol>
                 </div>
             </div>
         );
@@ -64,6 +109,6 @@ class Game extends React.Component {
 // ========================================
 
 ReactDOM.render(
-    <Game />,
+    <Game/>,
     document.getElementById('root')
 );
